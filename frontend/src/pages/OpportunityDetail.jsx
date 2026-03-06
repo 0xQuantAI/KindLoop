@@ -29,7 +29,7 @@ export default function OpportunityDetail() {
 
   const handleVolunteer = async () => {
     if (userType !== 'volunteer') {
-      setError('Please log in as a volunteer to sign up.');
+      setError('Please log in to join this KindLoop.');
       return;
     }
     setJoining(true);
@@ -59,9 +59,9 @@ export default function OpportunityDetail() {
   if (!need) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-500">Opportunity not found.</p>
+        <p className="text-gray-500">KindLoop not found.</p>
         <Button variant="link" onClick={() => navigate('/opportunities')} className="mt-4">
-          Back to Opportunities
+          Back to KindLoops
         </Button>
       </div>
     );
@@ -71,7 +71,7 @@ export default function OpportunityDetail() {
     <Card className="max-w-2xl">
       <CardHeader className="space-y-2">
         <div className="flex items-start justify-between gap-3">
-          <CardTitle className="text-2xl">{need.title}</CardTitle>
+          <CardTitle className="text-2xl">KindLoop: {need.title}</CardTitle>
           <Badge variant="secondary">{need.category}</Badge>
         </div>
         {need.description ? (
@@ -84,7 +84,7 @@ export default function OpportunityDetail() {
         <p><span className="font-medium text-foreground">Location:</span> {need.location || 'TBD'}</p>
         <p><span className="font-medium text-foreground">Date:</span> {new Date(need.date).toLocaleString()}</p>
         <p>
-          <span className="font-medium text-foreground">Volunteers:</span>{" "}
+          <span className="font-medium text-foreground">Helpers:</span>{" "}
           {joinedCount} signed up for {need.volunteersNeeded} needed
           {additionalCount > 0 ? ` (+${additionalCount} additional)` : ""}
         </p>
@@ -109,7 +109,7 @@ export default function OpportunityDetail() {
 
         {userType === 'volunteer' && !joined ? (
           <Button onClick={handleVolunteer} disabled={joining} className="w-full sm:flex-1 h-12 text-base">
-            {joining ? 'Signing up...' : isFull ? 'Join as additional volunteer' : 'I Can Help'}
+            {joining ? 'Signing up...' : isFull ? 'Join the Loop (additional)' : 'Join the Loop'}
           </Button>
         ) : null}
 
@@ -121,14 +121,14 @@ export default function OpportunityDetail() {
 
         {isFull && !userType ? (
           <Badge className="w-full justify-center sm:w-auto" variant="outline">
-            Slots filled — sign in as volunteer to join as additional
+            Slots filled — sign in to join as additional helper
           </Badge>
         ) : null}
       </CardFooter>
 
       {need.volunteersJoined?.length > 0 ? (
         <div className="border-t p-6">
-          <div className="text-sm font-medium">Volunteers ({need.volunteersJoined.length})</div>
+          <div className="text-sm font-medium">Helpers ({need.volunteersJoined.length})</div>
           <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
             {need.volunteersJoined.map((v) => (
               <li key={v._id}>• {v.name} {v.email ? `(${v.email})` : ""}</li>

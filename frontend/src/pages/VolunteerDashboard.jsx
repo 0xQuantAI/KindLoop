@@ -38,15 +38,15 @@ export default function VolunteerDashboard() {
     <div className="space-y-8">
       <div>
         <h1 className="text-2xl font-bold text-emerald-800">Hi, {user?.name}!</h1>
-        <p className="text-gray-600">Here are your volunteer opportunities.</p>
+        <p className="text-gray-600">Here are your KindLoops.</p>
       </div>
 
       <section>
-        <h2 className="text-lg font-bold text-gray-800 mb-4">Open Opportunities</h2>
+        <h2 className="text-lg font-bold text-gray-800 mb-4">Open KindLoops</h2>
         <div className="space-y-4">
           {openNeeds.length === 0 ? (
             <p className="text-gray-500 bg-white p-6 rounded-xl border">
-              No open opportunities right now. Check the opportunity board!
+              No open KindLoops right now. Check the KindLoops page!
             </p>
           ) : (
             openNeeds
@@ -61,16 +61,16 @@ export default function VolunteerDashboard() {
           to="/opportunities"
           className="inline-block mt-4 py-2 px-4 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-700"
         >
-          Browse All Opportunities
+          Browse All KindLoops
         </Link>
       </section>
 
       <section>
-        <h2 className="text-lg font-bold text-gray-800 mb-4">Opportunities I Signed Up For</h2>
+        <h2 className="text-lg font-bold text-gray-800 mb-4">KindLoops I joined</h2>
         <div className="space-y-4">
           {myJoined.length === 0 ? (
             <p className="text-gray-500 bg-white p-6 rounded-xl border">
-              You haven&apos;t signed up for any opportunities yet.
+              You haven&apos;t joined any KindLoops yet.
             </p>
           ) : (
             myJoined.map((need) => (
@@ -85,7 +85,7 @@ export default function VolunteerDashboard() {
         <div className="space-y-4">
           {myCompleted.length === 0 ? (
             <p className="text-gray-500 bg-white p-6 rounded-xl border">
-              No completed opportunities yet.
+              No completed KindLoops yet.
             </p>
           ) : (
             myCompleted.map((need) => (

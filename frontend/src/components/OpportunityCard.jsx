@@ -1,31 +1,33 @@
 import { Link } from 'react-router-dom';
-import { Badge } from './ui/badge';
 import { Button } from './ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card';
+import { Card, CardContent, CardFooter, CardHeader } from './ui/card';
 
 export default function OpportunityCard({ need, showVolunteerButton = false }) {
-  const slotsLeft = need.volunteersNeeded - (need.volunteersJoined?.length || 0);
-  const isFull = slotsLeft <= 0;
+  const joinedCount = need.volunteersJoined?.length || 0;
+  const helpersNeeded = need.volunteersNeeded;
+  const isFull = joinedCount >= helpersNeeded;
+  const additionalCount = Math.max(0, joinedCount - helpersNeeded);
 
   return (
     <Card className="transition-shadow hover:shadow-md">
-      <CardHeader className="space-y-2">
-        <div className="flex items-start justify-between gap-3">
-          <CardTitle className="text-base sm:text-lg">{need.title}</CardTitle>
-          <Badge variant="secondary">{need.category}</Badge>
-        </div>
+      <CardHeader className="space-y-1">
+        <p className="text-base font-semibold leading-tight sm:text-lg">
+          KindLoop: {need.title}
+        </p>
         {need.organizationId?.name ? (
-          <div className="text-sm text-muted-foreground">by {need.organizationId.name}</div>
+          <p className="text-sm text-muted-foreground">by {need.organizationId.name}</p>
         ) : null}
       </CardHeader>
-      <CardContent className="space-y-3">
+      <CardContent className="space-y-2">
         {need.description ? (
           <p className="text-sm text-muted-foreground line-clamp-2">{need.description}</p>
         ) : null}
         <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
-          <span>📍 {need.location || 'TBD'}</span>
-          <span>📅 {new Date(need.date).toLocaleDateString()}</span>
-          <span>👥 {need.volunteersJoined?.length || 0} of {need.volunteersNeeded} needed{isFull && (need.volunteersJoined?.length || 0) > need.volunteersNeeded ? ` (+${(need.volunteersJoined?.length || 0) - need.volunteersNeeded} extra)` : ''}</span>
+          <span>Location: {need.location || 'TBD'}</span>
+          <span>Helpers Needed: {helpersNeeded}</span>
+          {additionalCount > 0 ? (
+            <span className="text-primary">+{additionalCount} extra joined</span>
+          ) : null}
         </div>
       </CardContent>
       <CardFooter className="gap-2">
@@ -33,15 +35,11 @@ export default function OpportunityCard({ need, showVolunteerButton = false }) {
           <Link to={`/opportunities/${need._id}`}>View Details</Link>
         </Button>
         {showVolunteerButton ? (
-          isFull ? (
-            <Button asChild variant="secondary" className="flex-1">
-              <Link to={`/opportunities/${need._id}`}>Join as additional volunteer</Link>
-            </Button>
-          ) : (
-            <Button asChild className="flex-1">
-              <Link to={`/opportunities/${need._id}`}>I Can Help</Link>
-            </Button>
-          )
+          <Button asChild className="flex-1">
+            <Link to={`/opportunities/${need._id}`}>
+              {isFull ? 'Join the Loop (additional)' : 'Join the Loop'}
+            </Link>
+          </Button>
         ) : null}
       </CardFooter>
     </Card>

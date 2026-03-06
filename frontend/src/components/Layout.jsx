@@ -19,7 +19,7 @@ export default function Layout({ children }) {
 
           <div className="flex flex-wrap items-center gap-2">
             <Button asChild variant="ghost">
-              <Link to="/opportunities">Opportunities</Link>
+              <Link to="/opportunities">KindLoops</Link>
             </Button>
 
             {!user ? (
@@ -29,10 +29,10 @@ export default function Layout({ children }) {
                   <Link to="/login">Login</Link>
                 </Button>
                 <Button asChild>
-                  <Link to="/volunteer/signup">Volunteer Sign Up</Link>
+                  <Link to="/volunteer/signup">Join a KindLoop</Link>
                 </Button>
                 <Button asChild variant="secondary">
-                  <Link to="/org/signup">Organization Sign Up</Link>
+                  <Link to="/org/signup">Start a KindLoop</Link>
                 </Button>
               </>
             ) : (

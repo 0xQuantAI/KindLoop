@@ -28,7 +28,7 @@ export default function OpportunityBoard() {
       .then((res) => setNeeds(res.data || []))
       .catch((err) => {
         console.error(err);
-        setError(err.response?.data?.error || 'Could not load opportunities.');
+        setError(err.response?.data?.error || 'Could not load KindLoops.');
         setNeeds([]);
       })
       .finally(() => setLoading(false));
@@ -40,9 +40,9 @@ export default function OpportunityBoard() {
     <div className="space-y-6">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Opportunities</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">KindLoops</h1>
           <p className="text-sm text-muted-foreground">
-            Browse open volunteer needs.
+            Find a KindLoop and join the loop.
           </p>
         </div>
         {!user ? (
@@ -93,14 +93,14 @@ export default function OpportunityBoard() {
       </div>
 
       {loading ? (
-        <p className="text-center py-12 text-gray-500">Loading opportunities...</p>
+        <p className="text-center py-12 text-gray-500">Loading KindLoops...</p>
       ) : error ? (
         <p className="text-center py-12 text-destructive bg-destructive/10 p-8 rounded-xl border border-destructive/30">
           {error}
         </p>
       ) : needs.length === 0 ? (
         <p className="text-center py-12 text-muted-foreground bg-card p-8 rounded-xl border">
-          No open opportunities at the moment. Check back soon!
+          No KindLoops at the moment. Check back soon!
         </p>
       ) : (
         <div className="grid gap-4 md:grid-cols-2">
@@ -117,7 +117,7 @@ export default function OpportunityBoard() {
       {!user && (
         <div className="rounded-xl border bg-muted p-4 text-center">
           <p className="text-muted-foreground font-medium">
-            Sign up as a volunteer to click &quot;I Can Help&quot; and join opportunities.
+            Sign up to join KindLoops and click &quot;Join the Loop&quot;.
           </p>
         </div>
       )}
